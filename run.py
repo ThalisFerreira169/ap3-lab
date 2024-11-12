@@ -1,13 +1,11 @@
-# Import do Flask e bibliotecas e iniciando a aplicação
-from flask import Flask, render_template;
-app = Flask(__name__);
+from app import create_app
+from app.models import create_tables
 
+app = create_app()
 
-# Rota Home
-@app.route('/')
-def home():
-  return render_template('index.html');
+with app.app_context():
+  create_tables()
 
-# Inicializando a aplicação
-if __name__ == '__main__':
-  app.run(debug=True);
+if __name__ == "__main__":
+  app.run(debug=True)
+  
